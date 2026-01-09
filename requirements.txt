@@ -1,0 +1,8 @@
+pdfplumber
+pytesseract
+Pillow
+opencv-python
+pandas
+openpyxl
+fastapi
+uvicorn[standard]
