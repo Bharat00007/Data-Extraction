@@ -1,13 +1,17 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
-[project]
+[tool.poetry]
 name = "data-extraction"
 version = "0.1.0"
 description = "Invoice Data Extraction API"
-requires-python = ">=3.8"
+authors = ["you <taklikarbharat8@gmail.com>"]
+readme = "readme.md"
 
-[project.scripts]
-# Vercel looks for an `app` script that points to the ASGI app object.
+[tool.poetry.dependencies]
+python = "^3.8"
+fastapi = "*"
+
+[tool.poetry.scripts]
 app = "api:app"
