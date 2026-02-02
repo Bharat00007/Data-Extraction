@@ -35,3 +35,7 @@ dependencies = [
 
 [project.scripts]
 app = "api:app"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["*"]
