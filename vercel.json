@@ -1,19 +1,5 @@
 {
-  "builds": [
-    {
-      "src": "app.py",
-      "use": "@vercel/python@4.1.0",
-      "config": {
-        "maxLambdaSize": "250mb",
-        "runtime": "python3.12"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "app.py"
-    }
-  ]
+  "env": {
+    "PYTHONUNBUFFERED": "1"
+  }
 }
-
