@@ -21,7 +21,7 @@ name = "data-extraction"
 version = "0.1.0"
 description = "Invoice Data Extraction API"
 readme = "readme.md"
-requires-python = ">=3.10"
+requires-python = ">=3.8"
 dependencies = [
 	"fastapi",
 	"uvicorn[standard]",
@@ -40,3 +40,4 @@ app = "api:app"
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["core", "cli"]
+
