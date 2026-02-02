@@ -4,8 +4,6 @@ from fastapi.middleware.cors import CORSMiddleware
 import tempfile
 import os
 from pathlib import Path
-from core.ocr import OCRService
-from core.extract import InvoiceFieldExtractor
 
 app = FastAPI(title="Invoice Data Extraction API", description="API for extracting data from invoice PDFs and images")
 
@@ -18,15 +16,33 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers
 )
 
-# Initialize services
-ocr_service = OCRService()
-extractor = InvoiceFieldExtractor()
+# Initialize services (lazy-loaded to avoid import errors)
+ocr_service = None
+extractor = None
+
+def init_services():
+    global ocr_service, extractor
+    if ocr_service is None:
+        try:
+            from core.ocr import OCRService
+            from core.extract import InvoiceFieldExtractor
+            ocr_service = OCRService()
+            extractor = InvoiceFieldExtractor()
+        except Exception as e:
+            print(f"Warning: Could not initialize OCR services: {e}")
+            raise HTTPException(status_code=503, detail="OCR services not available")
+
+@app.get("/")
+async def root():
+    return {"message": "Invoice Data Extraction API", "version": "1.0.0", "status": "ok"}
 
 @app.post("/extract")
 async def extract_invoice_data(file: UploadFile = File(...)):
     """
     Extract invoice data from uploaded PDF or image file.
     """
+    init_services()
+    
     # Validate file type
     allowed_extensions = {".pdf", ".jpg", ".jpeg", ".png"}
     file_extension = Path(file.filename).suffix.lower()
@@ -60,10 +76,7 @@ async def extract_invoice_data(file: UploadFile = File(...)):
         if os.path.exists(tmp_path):
             os.unlink(tmp_path)
 
-@app.get("/")
-async def root():
-    return {"message": "Invoice Data Extraction API", "version": "1.0.0"}
-
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=5000)
+
