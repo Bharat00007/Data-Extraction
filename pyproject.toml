@@ -21,16 +21,17 @@ name = "data-extraction"
 version = "0.1.0"
 description = "Invoice Data Extraction API"
 readme = "readme.md"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 dependencies = [
 	"fastapi",
 	"uvicorn[standard]",
-	"pdfplumber",
-	"pytesseract",
-	"Pillow",
-	"opencv-python",
-	"pandas",
-	"openpyxl"
+	"pdfplumber==0.10.4",
+	"pytesseract==0.3.10",
+	"Pillow==10.1.0",
+	"opencv-python-headless==4.8.1.78",
+	"pandas==2.1.3",
+	"openpyxl==3.1.2",
+	"numpy==1.26.2"
 ]
 
 [project.scripts]
@@ -38,4 +39,4 @@ app = "api:app"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["*"]
+include = ["core", "cli"]
