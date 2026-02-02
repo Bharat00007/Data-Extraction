@@ -2,6 +2,12 @@
 requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
+[project]
+name = "data-extraction"
+version = "0.1.0"
+description = "Invoice Data Extraction API"
+dependencies = []
+
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["core", "cli"]
