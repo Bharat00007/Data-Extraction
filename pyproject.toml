@@ -15,3 +15,23 @@ fastapi = "*"
 
 [tool.poetry.scripts]
 app = "api:app"
+
+[project]
+name = "data-extraction"
+version = "0.1.0"
+description = "Invoice Data Extraction API"
+readme = "readme.md"
+requires-python = ">=3.8"
+dependencies = [
+	"fastapi",
+	"uvicorn[standard]",
+	"pdfplumber",
+	"pytesseract",
+	"Pillow",
+	"opencv-python",
+	"pandas",
+	"openpyxl"
+]
+
+[project.scripts]
+app = "api:app"
