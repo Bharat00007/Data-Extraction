@@ -10,7 +10,7 @@ authors = ["you <taklikarbharat8@gmail.com>"]
 readme = "readme.md"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.12"
 fastapi = "*"
 
 [tool.poetry.scripts]
@@ -21,7 +21,7 @@ name = "data-extraction"
 version = "0.1.0"
 description = "Invoice Data Extraction API"
 readme = "readme.md"
-requires-python = ">=3.8"
+requires-python = ">=3.12"
 dependencies = [
 	"fastapi",
 	"uvicorn[standard]",
@@ -40,4 +40,5 @@ app = "api:app"
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["core", "cli"]
+
 
