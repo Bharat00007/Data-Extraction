@@ -10,10 +10,10 @@ app = FastAPI(title="Invoice Data Extraction API", description="API for extracti
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allows all origins
+    allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["*"],  # Allows all methods
-    allow_headers=["*"],  # Allows all headers
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Initialize services (lazy-loaded to avoid import errors)
@@ -75,8 +75,3 @@ async def extract_invoice_data(file: UploadFile = File(...)):
         # Clean up temporary file
         if os.path.exists(tmp_path):
             os.unlink(tmp_path)
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=5000)
-
